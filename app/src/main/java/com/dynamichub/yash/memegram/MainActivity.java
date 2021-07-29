@@ -3,16 +3,21 @@ package com.dynamichub.yash.memegram;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -27,6 +32,7 @@ import com.bumptech.glide.request.target.Target;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -37,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     String Currenturl=null;
     ProgressDialog mProgressDialog;
+
+
 
 
 
@@ -102,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT,Currenturl);
-       Intent chooser = Intent.createChooser(intent,"Share this meme using....");
+        Intent chooser = Intent.createChooser(intent,"Share this meme using....");
         startActivity(chooser);
 
 
@@ -117,13 +125,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    void DownloadImage(String fileName, String ImageURl){
+
+        try{
+
+            DownloadManager downloadManager=null;
+            downloadManager=(DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+
+            Uri downloaduri=Uri.parse(ImageURl);
+
+            DownloadManager.Request request=new DownloadManager.Request(downloaduri);
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+                    .setAllowedOverRoaming(false).setTitle(fileName).setMimeType("image/jpeg")
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, File.separator+fileName+".jpg");
+
+            downloadManager.enqueue(request);
+            Toast.makeText(this,"Image Downloaded",Toast.LENGTH_LONG).show();
+
+        }catch (Exception e){
+
+            Toast.makeText(this,"Image Downloading Failed", Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
     public void downloadMeme(View view){
 
         // This function is for downloading meme in gallery
 
-
+        DownloadImage("memeImage",Currenturl);
 
     }
+
+
 
 
 
