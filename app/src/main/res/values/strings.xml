@@ -2,4 +2,5 @@
     <string name="app_name">MemeGram</string>
     <string name="next">Next</string>
     <string name="share">Share</string>
+    <string name="meme_show_here">meme Show here</string>
 </resources>

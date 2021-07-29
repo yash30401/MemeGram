@@ -15,6 +15,7 @@
         android:layout_marginTop="74dp"
         android:layout_marginEnd="31dp"
         android:layout_marginRight="31dp"
+        android:contentDescription="@string/meme_show_here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -64,20 +65,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="327dp"
-        android:layout_marginLeft="327dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="283dp"
+        android:layout_marginLeft="283dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:onClick="downloadMeme"
+        android:padding="12dp"
+        android:paddingStart="9dp"
+        android:paddingLeft="20dp"
+        android:paddingEnd="25dp"
+        android:paddingRight="20dp"
+        app:backgroundTint="@color/cardview_dark_background"
+        app:icon="@drawable/ic_baseline_arrow_downward_24"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.647"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/ic_baseline_arrow_downward_24" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
