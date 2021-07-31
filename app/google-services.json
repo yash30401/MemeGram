@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "516338864533",
+    "project_id": "memegram-63eb9",
+    "storage_bucket": "memegram-63eb9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516338864533:android:32871cd0363316a028a69c",
+        "android_client_info": {
+          "package_name": "com.dynamichub.yash.memegram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516338864533-v907ho4to8b7k4r5kblfuvpp3k9hvo0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn-4FxD6K16QuSYtu0BskhjQwOccfxF1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516338864533-v907ho4to8b7k4r5kblfuvpp3k9hvo0q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

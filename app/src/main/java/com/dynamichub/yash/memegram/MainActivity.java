@@ -27,6 +27,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.json.JSONException;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     String Currenturl=null;
 
+    private FirebaseAnalytics firebaseAnalytics;
 
 
 
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         memeImageView=findViewById(R.id.memeImageView);
         progressBar=findViewById(R.id.progressBar);
 
+        firebaseAnalytics=FirebaseAnalytics.getInstance(this);
 
         loadMeme();
 
