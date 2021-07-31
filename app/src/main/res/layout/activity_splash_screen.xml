@@ -10,8 +10,7 @@
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
+        android:layout_height="600dp"
         app:lottie_autoPlay="true"
         app:lottie_fileName="memeGram.json"
         app:lottie_loop="true" />
@@ -21,24 +20,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
-        android:text="MemeGram"
+        android:text="@string/memegramTitle"
         android:textColor="#E91E63"
         android:textSize="50sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="620dp"
+        android:layout_below="@+id/animationView"
         />
 
     <TextView
         android:id="@+id/createdBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/memeGramTitle"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="700dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Created By : Yash"
-
+        android:text="@string/created_by_yash"
         android:textColor="#4E4C4C"
-        android:textSize="10sp" />
+        android:textSize="15sp" />
 
 </RelativeLayout>

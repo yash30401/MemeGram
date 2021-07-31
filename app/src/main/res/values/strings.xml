@@ -3,4 +3,6 @@
     <string name="next">Next</string>
     <string name="share">Share</string>
     <string name="meme_show_here">meme Show here</string>
+    <string name="memegramTitle">MemeGram</string>
+    <string name="created_by_yash">Created By : Yash</string>
 </resources>

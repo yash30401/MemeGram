@@ -4,23 +4,23 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DownloadManager;
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.content.Intent;
 
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
+
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -29,9 +29,9 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     String Currenturl=null;
-    ProgressDialog mProgressDialog;
+
 
 
 
@@ -54,7 +54,11 @@ public class MainActivity extends AppCompatActivity {
         memeImageView=findViewById(R.id.memeImageView);
         progressBar=findViewById(R.id.progressBar);
 
+
         loadMeme();
+
+
+
     }
 
     private void loadMeme(){
@@ -66,36 +70,30 @@ public class MainActivity extends AppCompatActivity {
 
 // Request a string response from the provided URL.
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
+                response -> {
 
-                        try {
-                             Currenturl=response.getString("url");
-                            Glide.with(MainActivity.this).load(Currenturl).listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    progressBar.setVisibility(View.GONE);
-                                    return false;
-                                }
+                    try {
+                         Currenturl=response.getString("url");
+                        Glide.with(MainActivity.this).load(Currenturl).listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
 
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    progressBar.setVisibility(View.GONE);
-                                    return false;
-                                }
-                            }).into(memeImageView);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        }).into(memeImageView);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
 
-            }
-        });
+                }, error -> {
+
+                });
 
 // Add the request to the RequestQueue.
        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
@@ -127,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         try{
 
-            DownloadManager downloadManager=null;
+            DownloadManager downloadManager;
             downloadManager=(DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
 
             Uri downloaduri=Uri.parse(ImageURl);
