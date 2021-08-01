@@ -5,4 +5,9 @@
     <string name="meme_show_here">meme Show here</string>
     <string name="memegramTitle">MemeGram</string>
     <string name="created_by_yash">Created By : Yash</string>
+    <string name="categories">Categories</string>
+    <string name="memes">Memes</string>
+    <string name="wholesomememes">Wholesome <br></br> Memes</string>
+    <string name="dankmemes">Dank <br></br>Memes </string>
+    <string name="animememes">Anime <br></br>Memes </string>
 </resources>
