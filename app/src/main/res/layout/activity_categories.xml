@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
+
     tools:context=".Categories">
 
     <Button
@@ -18,7 +19,7 @@
         android:onClick="MainMemes"
         android:textSize="25sp"
         android:fontFamily="@font/poppins_medium"
-        android:background="@drawable/sharebutton"
+        android:background="@drawable/rippleeffects"
         android:textColor="@color/pink"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +35,7 @@
         android:onClick="wholesomemes"
         android:textSize="16sp"
         android:fontFamily="@font/poppins_medium"
-        android:background="@drawable/sharebutton"
+        android:background="@drawable/rippleeffects"
         android:textColor="@color/pink"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +51,7 @@
         android:textSize="25sp"
         android:onClick="dankmemes"
         android:fontFamily="@font/poppins_medium"
-        android:background="@drawable/sharebutton"
+        android:background="@drawable/rippleeffects"
         android:textColor="@color/pink"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
@@ -62,7 +63,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:background="@drawable/sharebutton"
+        android:background="@drawable/rippleeffects"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/animememes"
         android:onClick="animememes"

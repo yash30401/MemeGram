@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name= "pink">#E91E63</color>
     <color name="downloadButton">#706C6C</color>
+    <color name="rippleDarkPink">#F1023A</color>
 </resources>
