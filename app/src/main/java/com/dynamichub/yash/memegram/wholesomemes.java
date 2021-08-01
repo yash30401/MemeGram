@@ -4,45 +4,38 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DownloadManager;
-
 import android.content.Context;
 import android.content.Intent;
-
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
-
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.firebase.analytics.FirebaseAnalytics;
+
 
 import org.json.JSONException;
 
 import java.io.File;
 
+public class wholesomemes extends AppCompatActivity {
 
-
-public class MainActivity extends AppCompatActivity {
 
     ImageView memeImageView;
     ProgressBar progressBar;
 
     String Currenturl=null;
 
-    private FirebaseAnalytics firebaseAnalytics;
 
 
 
@@ -56,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         memeImageView=findViewById(R.id.memeImageView);
         progressBar=findViewById(R.id.progressBar);
 
-        firebaseAnalytics=FirebaseAnalytics.getInstance(this);
+
 
         loadMeme();
 
@@ -69,15 +62,15 @@ public class MainActivity extends AppCompatActivity {
 // Instantiate the RequestQueue.
         progressBar.setVisibility(View.VISIBLE);
 
-        String url ="https://meme-api.herokuapp.com/gimme/memes";
+        String url ="https://meme-api.herokuapp.com/gimme/wholesomememes";
 
 // Request a string response from the provided URL.
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
                 response -> {
 
                     try {
-                         Currenturl=response.getString("url");
-                        Glide.with(MainActivity.this).load(Currenturl).listener(new RequestListener<Drawable>() {
+                        Currenturl=response.getString("url");
+                        Glide.with(wholesomemes.this).load(Currenturl).listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                                 progressBar.setVisibility(View.GONE);
@@ -96,10 +89,10 @@ public class MainActivity extends AppCompatActivity {
 
                 }, error -> {
 
-                });
+        });
 
 // Add the request to the RequestQueue.
-       MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 
     public void share(View view){
@@ -158,8 +151,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
 }
-
