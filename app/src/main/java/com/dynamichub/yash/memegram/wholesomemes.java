@@ -4,14 +4,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -39,7 +44,7 @@ public class wholesomemes extends AppCompatActivity {
 
     String Currenturl=null;
 
-
+    Dialog dialog;
 
 
 
@@ -53,6 +58,30 @@ public class wholesomemes extends AppCompatActivity {
         progressBar=findViewById(R.id.progressBar);
         wholesomelayout=findViewById(R.id.wholesomeLayout);
 
+        SharedPreferences prefs=getSharedPreferences("prefs",MODE_PRIVATE);
+        boolean first_star=prefs.getBoolean("firstStart",true);
+
+        dialog=new Dialog(wholesomemes.this);
+        dialog.setContentView(R.layout.customdialoge_box_layout);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
+        }
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(false);
+        dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
+
+        Button okay=dialog.findViewById(R.id.okayBtn);
+
+        SharedPreferences prefs2=getSharedPreferences("prefs",MODE_PRIVATE);
+        SharedPreferences.Editor editor=prefs.edit();
+        editor.putBoolean("firstStart",false);
+        editor.apply();
+
+        if(first_star){
+            dialog.show();
+        }
+
         wholesomelayout.setOnTouchListener(new OnSwipeTouchListener(wholesomemes.this){
             @Override
             public void onSwipeLeft() {
@@ -60,7 +89,13 @@ public class wholesomemes extends AppCompatActivity {
             }
         });
 
-
+        okay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Okay Dialoge Button Click Function
+                dialog.dismiss();
+            }
+        });
 
         wholeloadMeme();
 

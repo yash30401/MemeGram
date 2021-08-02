@@ -16,7 +16,7 @@
         <activity android:name=".wholesomemes" />
         <activity android:name=".dankMemes" />
         <activity android:name=".animememes" />
-        <activity android:name=".Categories" />
+        <activity android:name=".Categories"/>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
