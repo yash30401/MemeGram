@@ -2,6 +2,7 @@ package com.dynamichub.yash.memegram;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.DownloadManager;
 import android.content.Context;
@@ -34,6 +35,8 @@ public class wholesomemes extends AppCompatActivity {
     ImageView memeImageView;
     ProgressBar progressBar;
 
+    ConstraintLayout wholesomelayout;
+
     String Currenturl=null;
 
 
@@ -44,20 +47,28 @@ public class wholesomemes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_wholesomemes);
 
         memeImageView=findViewById(R.id.memeImageView);
         progressBar=findViewById(R.id.progressBar);
+        wholesomelayout=findViewById(R.id.wholesomeLayout);
+
+        wholesomelayout.setOnTouchListener(new OnSwipeTouchListener(wholesomemes.this){
+            @Override
+            public void onSwipeLeft() {
+                wholeloadMeme();
+            }
+        });
 
 
 
-        loadMeme();
+        wholeloadMeme();
 
 
 
     }
 
-    private void loadMeme(){
+    private void wholeloadMeme(){
 
 // Instantiate the RequestQueue.
         progressBar.setVisibility(View.VISIBLE);
@@ -112,7 +123,7 @@ public class wholesomemes extends AppCompatActivity {
 
         // Next Button Function
 
-        loadMeme();
+        wholeloadMeme();
 
     }
 

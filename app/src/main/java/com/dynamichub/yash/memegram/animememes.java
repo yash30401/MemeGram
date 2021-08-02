@@ -2,6 +2,7 @@ package com.dynamichub.yash.memegram;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.DownloadManager;
 import android.content.Context;
@@ -36,7 +37,7 @@ public class animememes extends AppCompatActivity {
 
     String Currenturl=null;
 
-
+    ConstraintLayout animelayout;
 
 
 
@@ -45,18 +46,28 @@ public class animememes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_animememes);
 
         memeImageView=findViewById(R.id.memeImageView);
         progressBar=findViewById(R.id.progressBar);
+        animelayout=findViewById(R.id.animeLayout);
 
-        loadMeme();
+        animelayout.setOnTouchListener(new OnSwipeTouchListener(animememes.this){
+            @Override
+            public void onSwipeLeft() {
+                animeloadMeme();
+            }
+        });
+
+
+
+        animeloadMeme();
 
 
 
     }
 
-    private void loadMeme(){
+    private void animeloadMeme(){
 
 // Instantiate the RequestQueue.
         progressBar.setVisibility(View.VISIBLE);
@@ -91,7 +102,7 @@ public class animememes extends AppCompatActivity {
         });
 
 // Add the request to the RequestQueue.
-        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+        MySingleton.getInstance(animememes.this).addToRequestQueue(jsonObjectRequest);
     }
 
     public void share(View view){
@@ -107,13 +118,7 @@ public class animememes extends AppCompatActivity {
 
     }
 
-    public void next(View view){
 
-        // Next Button Function
-
-        loadMeme();
-
-    }
 
 
     void DownloadImage(String fileName, String ImageURl){

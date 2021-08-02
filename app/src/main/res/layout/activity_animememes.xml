@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:id="@+id/animeLayout"
+    tools:context=".animememes">
 
     <ImageView
         android:id="@+id/memeImageView"
@@ -28,29 +29,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/downloadButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="283dp"
-        android:layout_marginLeft="283dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:onClick="downloadMeme"
-        android:background="@drawable/downloadicon"
-        android:padding="12dp"
-        android:paddingStart="8dp"
-        android:paddingLeft="20dp"
-        android:paddingEnd="25dp"
-        android:paddingRight="20dp"
-        app:backgroundTint="@color/downloadButton"
-        app:icon="@drawable/ic_baseline_arrow_downward_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.647"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,16 +56,15 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/nextButton"
+            android:id="@+id/downloadButton"
             android:layout_width="150dp"
             android:layout_height="70dp"
-            android:layout_margin="10dp"
-            android:fontFamily="sans-serif"
-            android:onClick="next"
             android:background="@drawable/nextbutton"
-            android:text="@string/next"
-            android:textAllCaps="false"
-            android:textSize="20sp" />
+            android:onClick="downloadMeme"
+            android:layout_margin="10dp"
+            android:text="@string/downloadthis" />
+
+
     </LinearLayout>
 
 

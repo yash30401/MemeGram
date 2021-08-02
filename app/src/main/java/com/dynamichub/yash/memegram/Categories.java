@@ -42,5 +42,11 @@ public class Categories extends AppCompatActivity {
         startActivity(animememesintent);
     }
 
+    public void pubgmemes(View view){
+        // Animememes button function starts from here
+
+        Intent pubgememesintent=new Intent(Categories.this,pubgMemes.class);
+        startActivity(pubgememesintent);
+    }
 
 }

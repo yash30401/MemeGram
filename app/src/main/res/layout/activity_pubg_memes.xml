@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/dankLayout"
-    tools:context=".dankMemes">
+    android:id="@+id/pubglayout"
+    tools:context=".pubgMemes">
 
     <ImageView
         android:id="@+id/memeImageView"
@@ -59,11 +59,11 @@
             android:id="@+id/downloadButton"
             android:layout_width="150dp"
             android:layout_height="70dp"
-            android:layout_margin="10dp"
             android:background="@drawable/nextbutton"
             android:text="@string/downloadthis"
+            android:layout_margin="10dp"
             android:onClick="downloadMeme"
-      />
+    />
 
     </LinearLayout>
 

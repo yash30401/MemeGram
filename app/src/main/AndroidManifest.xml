@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MemeGram">
-        <activity android:name=".wholesomemes"></activity>
+        <activity android:name=".pubgMemes"></activity>
+        <activity android:name=".wholesomemes" />
         <activity android:name=".dankMemes" />
         <activity android:name=".animememes" />
         <activity android:name=".Categories" />

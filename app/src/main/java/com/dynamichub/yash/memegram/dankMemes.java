@@ -2,6 +2,7 @@ package com.dynamichub.yash.memegram;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.DownloadManager;
 import android.content.Context;
@@ -33,6 +34,7 @@ public class dankMemes extends AppCompatActivity {
 
     ImageView memeImageView;
     ProgressBar progressBar;
+    ConstraintLayout danklayout;
 
     String Currenturl=null;
 
@@ -45,20 +47,28 @@ public class dankMemes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_dank_memes);
 
         memeImageView=findViewById(R.id.memeImageView);
         progressBar=findViewById(R.id.progressBar);
+        danklayout=findViewById(R.id.dankLayout);
+
+        danklayout.setOnTouchListener(new OnSwipeTouchListener(dankMemes.this){
+            @Override
+            public void onSwipeLeft() {
+                dankloadMeme();
+            }
+        });
 
 
 
-        loadMeme();
+        dankloadMeme();
 
 
 
     }
 
-    private void loadMeme(){
+    private void dankloadMeme(){
 
 // Instantiate the RequestQueue.
         progressBar.setVisibility(View.VISIBLE);
@@ -109,13 +119,6 @@ public class dankMemes extends AppCompatActivity {
 
     }
 
-    public void next(View view){
-
-        // Next Button Function
-
-        loadMeme();
-
-    }
 
 
     void DownloadImage(String fileName, String ImageURl){
