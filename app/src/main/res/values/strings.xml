@@ -12,4 +12,6 @@
     <string name="animememes">Anime <br></br>Memes </string>
     <string name="pubgmemes">Pubg <br></br>Memes </string>
     <string name="downloadthis">Download</string>
+    <string name="swipingInfo">Swipe Left To Load Memes. </string>
+    <string name="okay">Okay</string>
 </resources>
