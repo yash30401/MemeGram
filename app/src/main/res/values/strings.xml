@@ -14,4 +14,9 @@
     <string name="downloadthis">Download</string>
     <string name="swipingInfo">Swipe Left To Load Memes. </string>
     <string name="okay">Okay</string>
+    <string name="about">About</string>
+    <string name="privacyPolicy">Privacy Policy</string>
+    <string name="disclaimer">Disclaimer</string>
+    <string name="terms">Terms &amp; Conditions</string>
+    <string name="aboutDesc">MemeGram is one such app that works through an API. Whose link is https://github.com/D3vd/Meme_Api. This app picks up meme from reddit and shows us through this api. This app have many meme categories you can choose according to your preference. MemeGram is not affiliated to Reddit in any manner.</string>
 </resources>
