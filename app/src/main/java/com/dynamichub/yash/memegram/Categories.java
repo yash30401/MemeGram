@@ -29,6 +29,9 @@ public class Categories extends AppCompatActivity {
 
 
         setSupportActionBar(toolbar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setOverflowIcon(getDrawable(R.drawable.ic_baseline_more_vert_24));
+        }
 
     }
 
@@ -57,6 +60,42 @@ public class Categories extends AppCompatActivity {
             dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
             dialog.show();
 
+        }else if(id==R.id.privacyPolicy){
+
+            dialog=new Dialog(Categories.this);
+            dialog.setContentView(R.layout.dialogprivacy);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
+            }
+
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.setCancelable(true);
+            dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
+            dialog.show();
+        }else if(id==R.id.disclaimer){
+
+            dialog=new Dialog(Categories.this);
+            dialog.setContentView(R.layout.dialogdiaclaimer);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
+            }
+
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.setCancelable(true);
+            dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
+            dialog.show();
+        }else if(id==R.id.terms){
+
+            dialog=new Dialog(Categories.this);
+            dialog.setContentView(R.layout.dialogterms);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
+            }
+
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.setCancelable(true);
+            dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
+            dialog.show();
         }
         return true;
     }
