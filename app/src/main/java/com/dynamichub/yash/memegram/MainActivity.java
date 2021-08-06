@@ -45,7 +45,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import org.json.JSONException;
 
 import java.io.File;
-
+import java.util.Stack;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
     Dialog dialog;
 
+    Stack<String> memeLinks;
+    String previouLink;
 
 
 
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         memeImageView=findViewById(R.id.memeImageView);
         progressBar=findViewById(R.id.progressBar);
+        memeLinks=new Stack<String>();
 
 
 
@@ -107,7 +110,15 @@ public class MainActivity extends AppCompatActivity {
                 loadMeme();
 
             }
+
+            @Override
+            public void onSwipeRight() {
+             previouLink=memeLinks.pop();
+             loadMeme2();
+            }
         });
+
+
 
 
 
@@ -210,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
 
                     try {
                          Currenturl=response.getString("url");
+                         memeLinks.push(Currenturl);
                         Glide.with(MainActivity.this).load(Currenturl).listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -234,6 +246,47 @@ public class MainActivity extends AppCompatActivity {
 // Add the request to the RequestQueue.
        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
+
+    private void loadMeme2(){
+
+// Instantiate the RequestQueue.
+        progressBar.setVisibility(View.VISIBLE);
+
+        String url ="https://meme-api.herokuapp.com/gimme/memes";
+
+// Request a string response from the provided URL.
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+                response -> {
+
+                    try {
+                        Currenturl=response.getString("url");
+
+
+                        Glide.with(MainActivity.this).load(previouLink).listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        }).into(memeImageView);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }, error -> {
+
+        });
+
+// Add the request to the RequestQueue.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+    }
+
 
     public void share(View view){
 
