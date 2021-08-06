@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +37,7 @@ import com.bumptech.glide.request.target.Target;
 import org.json.JSONException;
 
 import java.io.File;
+import java.util.Stack;
 
 public class programmerMemes extends AppCompatActivity {
 
@@ -47,7 +49,8 @@ public class programmerMemes extends AppCompatActivity {
 
     Dialog dialog;
 
-
+    Stack<String> memeLinks;
+    String previouLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class programmerMemes extends AppCompatActivity {
         memeImageView=findViewById(R.id.memeImageView);
         progressBar=findViewById(R.id.progressBar);
         programmerlayout=findViewById(R.id.programmerMemesLayout);
+        memeLinks=new Stack<String>();
+
 
         SharedPreferences prefs=getSharedPreferences("prefs",MODE_PRIVATE);
         boolean first_star=prefs.getBoolean("firstStart",true);
@@ -86,6 +91,19 @@ public class programmerMemes extends AppCompatActivity {
             @Override
             public void onSwipeLeft() {
                 programmerloadMeme();
+            }
+
+            @Override
+            public void onSwipeRight() {
+                memeLinks.pop();
+                previouLink=memeLinks.pop();
+                Log.d("previous url",previouLink);
+                Currenturl=previouLink;
+                Log.d("current url",Currenturl);
+
+                programmerloadMeme2();
+
+
             }
         });
 
@@ -187,6 +205,7 @@ public class programmerMemes extends AppCompatActivity {
 
                     try {
                         Currenturl=response.getString("url");
+                        memeLinks.push(Currenturl);
                         Glide.with(programmerMemes.this).load(Currenturl).listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
@@ -211,6 +230,44 @@ public class programmerMemes extends AppCompatActivity {
 // Add the request to the RequestQueue.
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
+
+    private void programmerloadMeme2(){
+
+        //Created For Previous Memes
+
+// Instantiate the RequestQueue.
+        progressBar.setVisibility(View.VISIBLE);
+
+        String url ="https://meme-api.herokuapp.com/gimme/ProgrammerHumor";
+
+// Request a string response from the provided URL.
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
+                response -> {
+
+
+                        Glide.with(programmerMemes.this).load(previouLink).listener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                progressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        }).into(memeImageView);
+
+
+                }, error -> {
+
+        });
+
+// Add the request to the RequestQueue.
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+    }
+
 
     public void share(View view){
 
