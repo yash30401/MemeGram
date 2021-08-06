@@ -5,14 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -114,6 +114,11 @@ public class Categories extends AppCompatActivity {
         Intent dankmemesintent=new Intent(Categories.this,dankMemes.class);
         startActivity(dankmemesintent);
 
+    }
+
+    public void programmerMemes(View view){
+        Intent programmerintent=new Intent(Categories.this,programmerMemes.class);
+        startActivity(programmerintent);
     }
 
     public void wholesomemes(View view){

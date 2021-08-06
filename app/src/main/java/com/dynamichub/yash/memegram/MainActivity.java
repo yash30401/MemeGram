@@ -1,8 +1,12 @@
 package com.dynamichub.yash.memegram;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import android.app.ActionBar;
 
 import android.app.Dialog;
 import android.app.DownloadManager;
@@ -18,6 +22,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import android.view.ViewGroup;
@@ -115,11 +121,81 @@ public class MainActivity extends AppCompatActivity {
 
         loadMeme();
 
+        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+
+
+        setSupportActionBar(toolbar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            toolbar.setOverflowIcon(getDrawable(R.drawable.ic_baseline_more_vert_24));
+        }
 
 
 
     }
 
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id=item.getItemId();
+
+        if (id==R.id.about){
+
+
+
+            dialog=new Dialog(MainActivity.this);
+            dialog.setContentView(R.layout.dialogabout);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
+            }
+
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.setCancelable(true);
+            dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
+            dialog.show();
+
+        }else if(id==R.id.privacyPolicy){
+
+            dialog=new Dialog(MainActivity.this);
+            dialog.setContentView(R.layout.dialogprivacy);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
+            }
+
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.setCancelable(true);
+            dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
+            dialog.show();
+        }else if(id==R.id.disclaimer){
+
+            dialog=new Dialog(MainActivity.this);
+            dialog.setContentView(R.layout.dialogdiaclaimer);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
+            }
+
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.setCancelable(true);
+            dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
+            dialog.show();
+        }else if(id==R.id.terms){
+
+            dialog=new Dialog(MainActivity.this);
+            dialog.setContentView(R.layout.dialogterms);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
+            }
+
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            dialog.setCancelable(true);
+            dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
+            dialog.show();
+        }
+        return true;
+    }
 
     private void loadMeme(){
 

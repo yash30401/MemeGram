@@ -33,38 +33,35 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
-
 import org.json.JSONException;
 
 import java.io.File;
 
-public class animememes extends AppCompatActivity {
-
+public class programmerMemes extends AppCompatActivity {
 
     ImageView memeImageView;
     ProgressBar progressBar;
+    ConstraintLayout programmerlayout;
 
     String Currenturl=null;
 
-    ConstraintLayout animelayout;
-
-
     Dialog dialog;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_animememes);
+        setContentView(R.layout.activity_programmer_memes);
 
         memeImageView=findViewById(R.id.memeImageView);
         progressBar=findViewById(R.id.progressBar);
-        animelayout=findViewById(R.id.animeLayout);
+        programmerlayout=findViewById(R.id.programmerMemesLayout);
 
         SharedPreferences prefs=getSharedPreferences("prefs",MODE_PRIVATE);
         boolean first_star=prefs.getBoolean("firstStart",true);
 
-        dialog=new Dialog(animememes.this);
+        dialog=new Dialog(programmerMemes.this);
         dialog.setContentView(R.layout.customdialoge_box_layout);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
@@ -85,10 +82,10 @@ public class animememes extends AppCompatActivity {
             dialog.show();
         }
 
-        animelayout.setOnTouchListener(new OnSwipeTouchListener(animememes.this){
+        programmerlayout.setOnTouchListener(new OnSwipeTouchListener(programmerMemes.this){
             @Override
             public void onSwipeLeft() {
-                animeloadMeme();
+                programmerloadMeme();
             }
         });
 
@@ -100,8 +97,7 @@ public class animememes extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
-        animeloadMeme();
+        programmerloadMeme();
 
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
 
@@ -127,7 +123,7 @@ public class animememes extends AppCompatActivity {
 
 
 
-            dialog=new Dialog(animememes.this);
+            dialog=new Dialog(programmerMemes.this);
             dialog.setContentView(R.layout.dialogabout);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
@@ -140,7 +136,7 @@ public class animememes extends AppCompatActivity {
 
         }else if(id==R.id.privacyPolicy){
 
-            dialog=new Dialog(animememes.this);
+            dialog=new Dialog(programmerMemes.this);
             dialog.setContentView(R.layout.dialogprivacy);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
@@ -152,7 +148,7 @@ public class animememes extends AppCompatActivity {
             dialog.show();
         }else if(id==R.id.disclaimer){
 
-            dialog=new Dialog(animememes.this);
+            dialog=new Dialog(programmerMemes.this);
             dialog.setContentView(R.layout.dialogdiaclaimer);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
@@ -164,7 +160,7 @@ public class animememes extends AppCompatActivity {
             dialog.show();
         }else if(id==R.id.terms){
 
-            dialog=new Dialog(animememes.this);
+            dialog=new Dialog(programmerMemes.this);
             dialog.setContentView(R.layout.dialogterms);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
@@ -178,12 +174,12 @@ public class animememes extends AppCompatActivity {
         return true;
     }
 
-    private void animeloadMeme(){
+    private void programmerloadMeme(){
 
 // Instantiate the RequestQueue.
         progressBar.setVisibility(View.VISIBLE);
 
-        String url ="https://meme-api.herokuapp.com/gimme/animememes";
+        String url ="https://meme-api.herokuapp.com/gimme/ProgrammerHumor";
 
 // Request a string response from the provided URL.
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
@@ -191,7 +187,7 @@ public class animememes extends AppCompatActivity {
 
                     try {
                         Currenturl=response.getString("url");
-                        Glide.with(animememes.this).load(Currenturl).listener(new RequestListener<Drawable>() {
+                        Glide.with(programmerMemes.this).load(Currenturl).listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                                 progressBar.setVisibility(View.GONE);
@@ -213,7 +209,7 @@ public class animememes extends AppCompatActivity {
         });
 
 // Add the request to the RequestQueue.
-        MySingleton.getInstance(animememes.this).addToRequestQueue(jsonObjectRequest);
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
 
     public void share(View view){
@@ -228,7 +224,6 @@ public class animememes extends AppCompatActivity {
 
 
     }
-
 
 
 
@@ -264,7 +259,4 @@ public class animememes extends AppCompatActivity {
         DownloadImage("memeImage",Currenturl);
 
     }
-
-
-
 }
