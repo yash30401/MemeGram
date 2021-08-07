@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -62,6 +63,9 @@ public class programmerMemes extends AppCompatActivity {
         programmerlayout=findViewById(R.id.programmerMemesLayout);
         memeLinks=new Stack<String>();
 
+        if(isNetworkConnected()==false){
+            nointernet();
+        }
 
         SharedPreferences prefs=getSharedPreferences("prefs",MODE_PRIVATE);
         boolean first_star=prefs.getBoolean("firstStart",true);
@@ -90,11 +94,17 @@ public class programmerMemes extends AppCompatActivity {
         programmerlayout.setOnTouchListener(new OnSwipeTouchListener(programmerMemes.this){
             @Override
             public void onSwipeLeft() {
+                if(isNetworkConnected()==false){
+                    nointernet();
+                }
                 programmerloadMeme();
             }
 
             @Override
             public void onSwipeRight() {
+                if(isNetworkConnected()==false){
+                    nointernet();
+                }
                 memeLinks.pop();
                 previouLink=memeLinks.pop();
                 Log.d("previous url",previouLink);
@@ -316,4 +326,28 @@ public class programmerMemes extends AppCompatActivity {
         DownloadImage("memeImage",Currenturl);
 
     }
+
+    private boolean isNetworkConnected() {
+        //Checking Internet Connection
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+    }
+
+    public void nointernet(){
+
+        // No Innternet Dialog Call
+
+        dialog=new Dialog(programmerMemes.this);
+        dialog.setContentView(R.layout.diaolginternetconnection);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
+        }
+
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
+        dialog.show();
+    }
+
 }

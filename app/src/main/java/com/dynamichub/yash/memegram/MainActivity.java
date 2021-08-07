@@ -16,6 +16,7 @@ import android.content.Intent;
 
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 
 import android.os.Build;
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         progressBar=findViewById(R.id.progressBar);
         memeLinks=new Stack<String>();
 
+
+        if(isNetworkConnected()==false){
+            nointernet();
+        }
 
 
 
@@ -109,12 +116,18 @@ public class MainActivity extends AppCompatActivity {
         constraintLayout.setOnTouchListener(new OnSwipeTouchListener(MainActivity.this){
             @Override
             public void onSwipeLeft() {
+                if(isNetworkConnected()==false){
+                    nointernet();
+                }
                 loadMeme();
 
             }
 
             @Override
             public void onSwipeRight() {
+                if(isNetworkConnected()==false){
+                    nointernet();
+                }
                 memeLinks.pop();
                 previouLink=memeLinks.pop();
                 Log.d("previous url",previouLink);
@@ -220,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
 // Instantiate the RequestQueue.
         progressBar.setVisibility(View.VISIBLE);
+
 
         String url ="https://meme-api.herokuapp.com/gimme/memes";
 
@@ -342,7 +356,28 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+private boolean isNetworkConnected() {
+    //Checking Internet Connection
+    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
+    return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+}
+
+public void nointernet(){
+
+        // No Innternet Dialog Call
+
+    dialog=new Dialog(MainActivity.this);
+    dialog.setContentView(R.layout.diaolginternetconnection);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialogbackground));
+    }
+
+    dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+    dialog.setCancelable(true);
+    dialog.getWindow().getAttributes().windowAnimations=R.style.animation;
+    dialog.show();
+}
 
 
 
