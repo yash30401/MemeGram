@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         SharedPreferences prefs=getSharedPreferences("prefs",MODE_PRIVATE);
         boolean first_star=prefs.getBoolean("firstStart",true);
 
@@ -113,8 +115,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwipeRight() {
-             previouLink=memeLinks.pop();
-             loadMeme2();
+                memeLinks.pop();
+                previouLink=memeLinks.pop();
+                Log.d("previous url",previouLink);
+                Currenturl=previouLink;
+                Log.d("current url",Currenturl);
+
+
+                loadMeme2();
             }
         });
 
@@ -258,8 +266,6 @@ public class MainActivity extends AppCompatActivity {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null,
                 response -> {
 
-                    try {
-                        Currenturl=response.getString("url");
 
 
                         Glide.with(MainActivity.this).load(previouLink).listener(new RequestListener<Drawable>() {
@@ -275,9 +281,7 @@ public class MainActivity extends AppCompatActivity {
                                 return false;
                             }
                         }).into(memeImageView);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+
 
                 }, error -> {
 

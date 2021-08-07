@@ -18,7 +18,7 @@
     <string name="privacyPolicy">Privacy Policy</string>
     <string name="disclaimer">Disclaimer</string>
     <string name="terms">Terms &amp; Conditions</string>
-    <string name="aboutDesc">MemeGram is one such app that works through an API. Whose link is https://github.com/D3vd/Meme_Api. This app picks up meme from reddit and shows us through this api. This app have many meme categories you can choose according to your preference. MemeGram is not affiliated to Reddit in any manner.</string>
+    <string name="aboutDesc">MemeGram is one such app that works through an API. Whose link is https://github.com/D3vd/Meme_Api. This app picks up meme from reddit and shows us through this api. This app have many meme categories you can choose according to your preference. MemeGram is not affiliated to Reddit in any manner.\n\nMemeGram Created by Yashveer Singh</string>
     <string name="privacydesc">Yashveer Singh built the MemeGram app as a Free app. This SERVICE is provided by Yashveer Singh at no cost and is intended for use as is.
 
 This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
